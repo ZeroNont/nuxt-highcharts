@@ -17,6 +17,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     'indent': 'off',
+    'vue/max-attributes-per-line': 'off',
     "no-unused-vars": 0
   }
 }

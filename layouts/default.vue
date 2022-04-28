@@ -1,6 +1,7 @@
 <template>
-  <v-app dark>
+  <v-app style="background: #ffffff;">
     <v-navigation-drawer
+    style="background: #ffffff;"
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
@@ -25,6 +26,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
+    style="background: #ffffff;"
       :clipped-left="clipped"
       fixed
       app
@@ -63,12 +65,13 @@
       </v-container>
     </v-main>
     <v-navigation-drawer
+    style="background: #ffffff;"
       v-model="rightDrawer"
       :right="right"
       temporary
       fixed
     >
-      <v-list>
+      <v-list style="background: #ffffff;">
         <v-list-item @click.native="right = !right">
           <v-list-item-action>
             <v-icon light>
@@ -80,7 +83,8 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer
-      :absolute="!fixed"
+    style="background: #ffffff;"
+
       app
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -116,6 +120,11 @@ export default {
           icon: 'mdi-poll',
           title: 'Bar Chart',
           to: '/Test_Bar'
+        },
+        {
+          icon: 'mdi-home',
+          title: 'Home',
+          to: '/HomePage'
         }
       ],
       miniVariant: false,

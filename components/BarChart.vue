@@ -1,18 +1,22 @@
 <template>
   <figure class='highcharts-figure'>
-    <div id='container2'></div>
+    <div id='container'></div>
   </figure>
 </template>
 <script>
+
 import Highcharts from 'highcharts'
 
 export default {
   mounted () {
     this.displayHighCharts()
+     if (typeof this.title !== 'undefined') {
+      this.chartOptions.title.text = this.title
+    }
   },
   methods: {
     displayHighCharts () {
-      Highcharts.chart('container2', {
+      Highcharts.chart('container', {
         chart: {
           type: 'column'
         },
@@ -56,46 +60,27 @@ export default {
           {
             name: 'Browsers',
             colorByPoint: true,
-            data: [
-              {
-                name: 'Chrome',
-                y: 200.74,
-                drilldown: 'Chrome'
-              },
-              {
-                name: 'Firefox',
-                y: 10.57,
-                drilldown: 'Firefox'
-              },
-              {
-                name: 'Internet Explorer',
-                y: 7.23,
-                drilldown: 'Internet Explorer'
-              },
-              {
-                name: 'Safari',
-                y: 5.58,
-                drilldown: 'Safari'
-              },
-              {
-                name: 'Edge',
-                y: 4.02,
-                drilldown: 'Edge'
-              },
-              {
-                name: 'Opera',
-                y: 1.92,
-                drilldown: 'Opera'
-              },
-              {
-                name: 'Other',
-                y: 7.62,
-                drilldown: null
-              }
-            ]
+            data: this.data
           }
         ]
       })
+    }
+  },watch: {
+    title (newValue) {
+      this.chartOptions.title.text = newValue
+    },
+    data (newValue, oldValue) {
+      console.log('pie watch fired', newValue)
+      for (const obj of newValue) {
+        const x = this.$children[0].chart.series[0].data.findIndex(
+          s => s.name === obj.name
+        )
+        if (x !== -1) {
+          console.log('pair found', obj, obj.y,obj.drilldown)
+          this.$children[0].chart.series[0].data[x].update(obj.y)
+          this.$children[0].chart.series[0].data[x].update(obj.drilldown)
+        }
+      }
     }
   }
 }
