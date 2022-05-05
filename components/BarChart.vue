@@ -21,10 +21,7 @@ export default {
           type: 'column'
         },
         title: {
-          text: 'Browser market shares.'
-        },
-        subtitle: {
-          text: 'Click the columns to view versions.'
+          text: ' '
         },
         accessibility: {
           announceNewData: {
@@ -65,9 +62,10 @@ export default {
         ]
       })
     }
-  },watch: {
+  },
+  watch: {
     title (newValue) {
-      this.chartOptions.title.text = newValue
+      this.plotOptions.title.text = newValue
     },
     data (newValue, oldValue) {
       console.log('pie watch fired', newValue)
@@ -76,7 +74,7 @@ export default {
           s => s.name === obj.name
         )
         if (x !== -1) {
-          console.log('pair found', obj, obj.y,obj.drilldown)
+          console.log('pair found', obj, obj.y, obj.drilldown)
           this.$children[0].chart.series[0].data[x].update(obj.y)
           this.$children[0].chart.series[0].data[x].update(obj.drilldown)
         }

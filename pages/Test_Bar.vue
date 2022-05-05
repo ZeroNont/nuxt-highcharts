@@ -1,6 +1,6 @@
 <template>
   <figure class='highcharts-figure'>
-    <div id='container2'></div>
+    <div id='container'></div>
   </figure>
 </template>
 <script>
@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     displayHighCharts () {
-      Highcharts.chart('container2', {
+      Highcharts.chart('container', {
         chart: {
           type: 'column'
         },

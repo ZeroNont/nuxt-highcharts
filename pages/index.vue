@@ -9,9 +9,6 @@
     <v-col><chart :data='points2'></chart></v-col>
   </v-row>
 </v-container>
- <figure class='highcharts-figure'>
-    <div id='container'></div>
-  </figure>
   </div>
 </template>
 
@@ -31,11 +28,9 @@ export default {
     {
         }).then(function (res) {
             response = res.data
-
             Object.keys(response).forEach(function (el) {
             response[el] = parseInt(response[el])
             })
-
             this.points = response.data.courier
             console.warn(points)
             console.warn('response success')
@@ -48,14 +43,6 @@ export default {
   },
   data () {
     return {
-      chartOptions: {
-        series: [
-          {
-            data: [1, 2, 3]
-          }
-        ]
-      },
-
       points2:
       [
         {
@@ -78,7 +65,6 @@ export default {
     }
   },
   mounted () {
-     this.displayHighCharts()
     let response
     let points
     axios.get('http://localhost:3001/get_data_all_courier',
@@ -97,99 +83,8 @@ export default {
             }
         })
   },
-
-   beforeDestroy () {
-  },
    methods: {
-    displayHighCharts () {
-      Highcharts.chart('container', {
-        chart: {
-          type: 'column'
-        },
-        title: {
-          text: 'Monthly delivery list.'
-        },
-        accessibility: {
-          announceNewData: {
-            enabled: true
-          }
-        },
-        xAxis: {
-          type: 'category'
-        },
-        yAxis: {
-          title: {
-            text: 'Total Delivery Items'
-          }
-        },
-        legend: {
-          enabled: false
-        },
-        plotOptions: {
-          series: {
-            borderWidth: 0,
-            dataLabels: {
-              enabled: true,
-              format: '{point.y:.0f} Items'
-            }
-          }
-        },
-        tooltip: {
-          headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-          pointFormat:
-            '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f} Items</b> of total<br/>'
-        },
-        series: [
-          {
-            name: 'Browsers',
-            colorByPoint: true,
-            data: [
-              {
-                name: 'Chrome',
-                y: 200,
-                drilldown: 'Chrome'
-              },
-              {
-                name: 'Firefox',
-                y: 10,
-                drilldown: 'Firefox'
-              },
-              {
-                name: 'Internet Explorer',
-                y: 7,
-                drilldown: 'Internet Explorer'
-              },
-              {
-                name: 'Safari',
-                y: 5,
-                drilldown: 'Safari'
-              },
-              {
-                name: 'Edge',
-                y: 4,
-                drilldown: 'Edge'
-              },
-              {
-                name: 'Opera',
-                y: 1,
-                drilldown: 'Opera'
-              },
-               {
-                name: 'KERRY',
-                y: 58,
-                drilldown: 'KERRY'
-            },
-              {
-                name: 'Other',
-                y: 7,
-                drilldown: null
-              }
-            ]
-          }
-        ]
-      })
     }
-  }
 }
 </script>
 <style scoped>

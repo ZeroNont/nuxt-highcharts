@@ -18,6 +18,9 @@ module.exports = {
   rules: {
     'indent': 'off',
     'vue/max-attributes-per-line': 'off',
-    "no-unused-vars": 0
+    "no-unused-vars": 0,
+    "vue/multi-word-component-names": ["error", {
+    "ignores": []
+  }]
   }
 }

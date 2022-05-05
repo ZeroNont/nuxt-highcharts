@@ -102,26 +102,6 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-chart-line',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        },
-        {
-          icon: 'mdi-chart-pie',
-          title: 'Pie Chart',
-          to: '/App'
-        },
-        {
-          icon: 'mdi-poll',
-          title: 'Bar Chart',
-          to: '/Test_Bar'
-        },
-        {
           icon: 'mdi-home',
           title: 'Home',
           to: '/HomePage'
