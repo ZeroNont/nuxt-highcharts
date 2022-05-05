@@ -186,7 +186,7 @@
        Total profit margin
       </p></v-col>
        <v-col> <p class="text-h5 " >
-        {{this.com_margin.margin}} ฿
+        {{this.com_margin.margin}} ฿ ({{this.com_margin.Percent}}%)
       </p></v-col>
     </v-card-text>
     </v-col>
