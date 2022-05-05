@@ -103,7 +103,7 @@
     style="background: #FFFFFF; padding:10px">
     <v-row>
       <v-col cols="5">
-        <v-img :src="'_nuxt/assets/image/'+points2.name+'.jpg'" height="100" style="border-radius: 15%; margin-top:10px;"></v-img></v-col>
+        <v-img :src="require('../assets/image/'+points2.name+'.jpg')" height="100" style="border-radius: 15%; margin-top:10px;"></v-img></v-col>
       <v-col>  <v-card-text>
       <p class="text-h5 " >
        {{points2.name}}
@@ -144,7 +144,7 @@
     style="background: #FFFFFF; padding:10px">
     <v-row>
       <v-col cols="3">
-        <v-img :src="'_nuxt/assets/image/'+this.com_margin.name+'.jpg'" height="150" style="border-radius: 15%; margin-top:10px;"></v-img>
+        <v-img :src="require('../assets/image/'+this.company_model.name+'.jpg')" height="150" style="border-radius: 15%; margin-top:10px;"></v-img>
         </v-col>
       <v-col cols="6">
       <v-card-text>
@@ -421,7 +421,7 @@ methods: {
         }
     },
     series: [{
-        name: 'margin',
+        name: 'market share',
         colorByPoint: true,
         data: this.points2
     }]
@@ -463,7 +463,7 @@ methods: {
         tooltip: {
           headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
           pointFormat:
-            '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}Items</b> of total<br/>'
+            '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}฿</b><br/>'
         },
         series: [
           {
