@@ -1,216 +1,223 @@
 <script src="https://unpkg.com/vue@2.2.6/dist/vue.js"></script>
 <template>
-<v-container class="grey lighten-5">
-   <v-card class="card" style="padding:10px ">
-    <v-col cols="2" align="end" light>
-         <v-select light id="year_input" v-model="year_input" :items="years" item-value="create_year"  item-text="create_year"/>
-    </v-col>
-<v-card class="card" style="padding:10px ">
-<v-row >
-   <v-col cols="3"   light>
+  <v-container class="grey lighten-5">
+    <v-card class="card" style="padding:10px ">
+      <v-col cols="2" align="end" light>
+        <v-select light id="year_input" v-model="year_input" :items="years" item-value="create_year"
+          item-text="create_year" />
+      </v-col>
+      <v-card class="card" style="padding:10px ">
+        <v-row>
+          <v-col cols="3" light>
+            <p class="text-h4" style="color:#303030 !important">
+              Shipping
+            </p>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-card class="mx-auto" max-width="344" style="background: #369FFF;">
+              <v-card-text>
+                <p class="h4 ">
+                  อยู่ระหว่างขนส่ง
+                </p>
+                <p class="h5">
+                  {{ shipping }} Items
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card class="mx-auto" max-width="344" style="background: #FF7E07; ">
+              <v-card-text>
+                <p class="h4 ">
+                  ได้รับพัสดุแล้ว
+                </p>
+                <p class="h5">
+                  {{ receive }} Items
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card class="mx-auto" max-width="344" style="background: #8AC53E;">
+              <v-card-text>
+                <p class="h4 ">
+                  Order ที่ถูกสร้าง
+                </p>
+                <p class="h5">
+                  {{ create }} Items
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card class="mx-auto" max-width="344" style="background: #FFC000;">
+              <v-card-text>
+                <p class="h4 ">
+                  พัสดุที่ถูกยกเลิก
+                </p>
+                <p class="h5">
+                  {{ cancel }} Items
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+        <br>
+      </v-card>
+      <br>
+      <hr><br>
+      <v-card class="card" style="padding:10px">
         <p class="text-h4" style="color:#303030 !important">
-        Shipping
+          Monthly delivery list
         </p>
-  </v-col>
-</v-row>
- <v-row>
-   <v-col><v-card
-    class="mx-auto"
-    max-width="344"
-    style="background: #369FFF;"
-  >
-<v-card-text>
-      <p class="h4 " >
-        อยู่ระหว่างขนส่ง
-      </p>
-      <p class="h5">
-        {{shipping}} Items
-      </p>
-    </v-card-text>
-  </v-card></v-col>
-   <v-col><v-card
-    class="mx-auto"
-    max-width="344"
-    style="background: #FF7E07; "
-  >
-   <v-card-text>
-      <p class="h4 " >
-        ได้รับพัสดุแล้ว
-      </p>
-      <p class="h5">
-         {{receive}} Items
-      </p>
-    </v-card-text>
-  </v-card></v-col>
-   <v-col><v-card
-    class="mx-auto"
-    max-width="344"
-    style="background: #8AC53E;"
-  >
-   <v-card-text>
-      <p class="h4 ">
-        Order ที่ถูกสร้าง
-      </p>
-      <p class="h5">
-         {{create}} Items
-      </p>
-    </v-card-text>
-  </v-card></v-col>
-   <v-col><v-card
-    class="mx-auto"
-    max-width="344"
-    style="background: #FFC000;"
-  >
-   <v-card-text>
-      <p class="h4 " >
-        พัสดุที่ถูกยกเลิก
-      </p>
-      <p class="h5" >
-         {{cancel}} Items
-      </p>
-    </v-card-text>
-  </v-card></v-col>
- </v-row>
- <br>
-</v-card>
-<br><hr><br>
- <v-card class="card" style="padding:10px">
- <p class="text-h4" style="color:#303030 !important">
-        Monthly delivery list
-      </p>
- <v-col >
-     <figure class='highcharts-figure'>
-    <div id='container'></div>
-  </figure>
- </v-col>
- </v-card>
- <br><hr><br>
-   <v-col cols="2" class="d-flex justify-end" light>
-         <v-select light v-model="company_model" :items="company" item-value="id" item-text="name" return-object v-on:change="company_detail" />
-    </v-col>
-  <div v-if="market_share">
- <v-row>
-      <v-col cols="6">
-        <v-card class="card" style="padding:20px">
-  <p class="text-h4" style="color:#303030 !important">
-        Payment
-        </p>
-        <v-row>
-<v-col cols="6"  v-for='points2 in points2'
-    :key='points2.item' >
-     <v-card class="full-height"
-    max-width="344"
-    style="background: #FFFFFF; padding:10px">
-    <v-row>
-      <v-col cols="5">
-        <v-img :src="require('../assets/image/'+points2.name+'.jpg')" height="100" style="border-radius: 15%; margin-top:10px;"></v-img></v-col>
-      <v-col>  <v-card-text>
-      <p class="text-h5 " >
-       {{points2.name}}
-      </p>
-      <p class="text-h6">
-        {{points2.y}} Items
-      </p>
-    </v-card-text>
-    </v-col>
-    </v-row>
-    </v-card>
-  </v-col>
-  </v-row>
-</v-card>
-</v-col>
-      <v-col cols="6">
-        <v-card class="card" style="padding:20px">
-  <p class="text-h4" style="color:#303030 !important">
-        Market share
-        </p>
-        <figure class="highcharts-figure">
-        <div id="container-pie"></div>
-        </figure>
-        </v-card>
-      </v-col>
-    </v-row>
-    </div>
-    <div v-if="com_detail">
- <v-row>
-      <v-col cols="6">
-        <v-card class="card" style="padding:20px">
-  <p class="text-h4" style="color:#303030 !important">
-        Payment
-        </p>
-        <v-row>
-    <v-col cols="12" >
-     <v-card class="full-height"
-    style="background: #FFFFFF; padding:10px">
-    <v-row>
-      <v-col cols="3">
-        <v-img :src="require('../assets/image/'+this.company_model.name+'.jpg')" height="150" style="border-radius: 15%; margin-top:10px;"></v-img>
+        <v-col>
+          <figure class='highcharts-figure'>
+            <div id='container'></div>
+          </figure>
         </v-col>
-      <v-col cols="6">
-      <v-card-text>
-      <v-col> <p class="text-h5 " >
-       {{this.com_margin.name}}
-      </p></v-col>
-       <v-col> <p class="text-h5 " >
-        {{this.com_margin.amount}} Items
-      </p></v-col>
-    </v-card-text>
-    </v-col>
-    </v-row>
-    </v-card>
-  </v-col>
-  <v-row>
-      <v-col cols="6" >
-     <v-card class="full-height"
-    style="background: #FFFFFF; padding:10px">
-    <v-row>
-      <v-col cols="12">
-      <v-card-text>
-      <v-col > <p class="text-h5 " >
-       Total freight fee
-      </p></v-col>
-       <v-col> <p class="text-h5 " >
-        {{this.com_margin.sum}} ฿
-      </p></v-col>
-    </v-card-text>
-    </v-col>
-    </v-row>
-    </v-card>
-  </v-col>  <v-col cols="6" v-show="com_detail_margin" >
-     <v-card class="full-height"
-    style="background: #FFFFFF; padding:10px" >
-    <v-row>
-      <v-col cols="12" >
-      <v-card-text>
-      <v-col> <p class="text-h5 " >
-       Total profit margin
-      </p></v-col>
-       <v-col> <p class="text-h5 " >
-        {{this.com_margin.margin}} ฿ ({{this.com_margin.Percent}}%)
-      </p></v-col>
-    </v-card-text>
-    </v-col>
-    </v-row>
-    </v-card>
-  </v-col>
-  </v-row>
-  </v-row>
-</v-card>
-</v-col>
-      <v-col cols="6" v-show="com_detail_margin">
-        <v-card class="card" style="padding:20px">
-  <p class="text-h4" style="color:#303030 !important">
-        Total profit margin
-        </p>
-        <figure class="highcharts-figure">
-        <div id="container-detail"></div>
-        </figure>
-        </v-card>
+      </v-card>
+      <br>
+      <hr><br>
+      <v-col cols="2" class="d-flex justify-end" light>
+        <v-select light v-model="company_model" :items="company" item-value="id" item-text="name" return-object
+          v-on:change="company_detail" />
       </v-col>
-    </v-row>
-    </div>
-</v-card>
-</v-container>
+      <div v-if="market_share">
+        <v-row>
+          <v-col cols="6">
+            <v-card class="card" style="padding:20px">
+              <p class="text-h4" style="color:#303030 !important">
+                Payment
+              </p>
+              <v-row>
+                <v-col cols="6" v-for='points2 in points2' :key='points2.item'>
+                  <v-card class="full-height" max-width="344" style="background: #FFFFFF; padding:10px">
+                    <v-row>
+                      <v-col cols="5">
+                        <v-img :src="require('../assets/image/' + points2.name + '.jpg')" height="100"
+                          style="border-radius: 15%; margin-top:10px;"></v-img>
+                      </v-col>
+                      <v-col>
+                        <v-card-text>
+                          <p class="text-h5 ">
+                            {{ points2.name }}
+                          </p>
+                          <p class="text-h6">
+                            {{ points2.y }} Items
+                          </p>
+                        </v-card-text>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+          <v-col cols="6">
+            <v-card class="card" style="padding:20px">
+              <p class="text-h4" style="color:#303030 !important">
+                Market share
+              </p>
+              <figure class="highcharts-figure">
+                <div id="container-pie"></div>
+              </figure>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+      <div v-if="com_detail">
+        <v-row>
+          <v-col cols="6">
+            <v-card class="card" style="padding:20px">
+              <p class="text-h4" style="color:#303030 !important">
+                Payment
+              </p>
+              <v-row>
+                <v-col cols="12">
+                  <v-card class="full-height" style="background: #FFFFFF; padding:10px">
+                    <v-row>
+                      <v-col cols="3">
+                        <v-img :src="require('../assets/image/' + this.company_model.name + '.jpg')" height="150"
+                          style="border-radius: 15%; margin-top:10px;"></v-img>
+                      </v-col>
+                      <v-col cols="6">
+                        <v-card-text>
+                          <v-col>
+                            <p class="text-h5 ">
+                              {{ this.com_margin.name }}
+                            </p>
+                          </v-col>
+                          <v-col>
+                            <p class="text-h5 ">
+                              {{ this.com_margin.amount }} Items
+                            </p>
+                          </v-col>
+                        </v-card-text>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+                </v-col>
+                <v-row>
+                  <v-col cols="6">
+                    <v-card class="full-height" style="background: #FFFFFF; padding:10px">
+                      <v-row>
+                        <v-col cols="12">
+                          <v-card-text>
+                            <v-col>
+                              <p class="text-h5 ">
+                                Total freight fee
+                              </p>
+                            </v-col>
+                            <v-col>
+                              <p class="text-h5 ">
+                                {{ this.com_margin.sum }} ฿
+                              </p>
+                            </v-col>
+                          </v-card-text>
+                        </v-col>
+                      </v-row>
+                    </v-card>
+                  </v-col>
+                  <v-col cols="6" v-show="com_detail_margin">
+                    <v-card class="full-height" style="background: #FFFFFF; padding:10px">
+                      <v-row>
+                        <v-col cols="12">
+                          <v-card-text>
+                            <v-col>
+                              <p class="text-h5 ">
+                                Total profit margin
+                              </p>
+                            </v-col>
+                            <v-col>
+                              <p class="text-h5 ">
+                                {{ this.com_margin.margin }} ฿ ({{ this.com_margin.Percent }}%)
+                              </p>
+                            </v-col>
+                          </v-card-text>
+                        </v-col>
+                      </v-row>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-row>
+            </v-card>
+          </v-col>
+          <v-col cols="6" v-show="com_detail_margin">
+            <v-card class="card" style="padding:20px">
+              <p class="text-h4" style="color:#303030 !important">
+                Total profit margin
+              </p>
+              <figure class="highcharts-figure">
+                <div id="container-detail"></div>
+              </figure>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+    </v-card>
+  </v-container>
 </template>
 <script>
 
@@ -375,7 +382,7 @@ methods: {
     },
     async getbar(){
        let response
-    this.bar = await axios.get('http://27.254.62.17:9008/show_data_by_month/'+this.year_input,{}).then(function (res) {
+    this.bar = await axios.get('http://localhost:3002//meeting/statistic/status?year='+this.year_input,{}).then(function (res) {
             response = res.data
             console.warn('response success')
         }).catch(function (error) {
@@ -388,8 +395,8 @@ methods: {
       this.bar = response.data
       this.bar = this.bar['parcels']
       const refArray = [ 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'January', 'February', 'March'];
-      this.bar.sort((a,b) => { return refArray.indexOf(a.name) - refArray.indexOf(b.name)});
-      console.log(this.bar[0].name)
+      this.bar.sort((a,b) => { return refArray.indexOf(a.month) - refArray.indexOf(b.month)});
+      console.log(this.bar[0].month)
     },
   displayPieCharts () {
     Highcharts.chart('container-pie', {
@@ -498,7 +505,7 @@ methods: {
         text: null
     },
     xAxis: {
-        categories: this.bar.map(a => a.name),
+        categories: this.bar.map(a => a.month),
         crosshair: true
     },
     yAxis: {
@@ -509,7 +516,7 @@ methods: {
     },
     tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.month}: </td>' +
             '<td style="padding:0"><b>{point.y:.0f} Items</b></td></tr>',
         footerFormat: '</table>',
         shared: true,
@@ -522,20 +529,20 @@ methods: {
         }
     },
     series: [{
-        name: 'DHL',
-        data: this.bar.map(a => a.DHL)
+        name: 'progress',
+        data: this.bar.map(a => a.progress)
 
     }, {
-        name: 'SCG',
-        data: this.bar.map(a => a.SCG)
+        name: 'done',
+        data: this.bar.map(a => a.done)
 
     }, {
-        name: 'THP',
-        data: this.bar.map(a => a.THP)
+        name: 'created',
+        data: this.bar.map(a => a.created)
 
     }, {
-        name: 'FLASH',
-        data: this.bar.map(a => a.FLASH)
+        name: 'canceled',
+        data: this.bar.map(a => a.canceled)
     }
     , {
         name: 'Total',
@@ -567,24 +574,29 @@ methods: {
   width: 100%;
   max-width: 100%;
 }
+
 .highcharts-data-table caption {
   padding: 1em 0;
   font-size: 1.2em;
   color: #555;
 }
+
 .highcharts-data-table th {
   font-weight: 600;
   padding: 0.5em;
 }
+
 .highcharts-data-table td,
 .highcharts-data-table th,
 .highcharts-data-table caption {
   padding: 0.5em;
 }
+
 .highcharts-data-table thead tr,
 .highcharts-data-table tr:nth-child(even) {
   background: #f8f8f8;
 }
+
 .highcharts-data-table tr:hover {
   background: #f1f7ff;
 }
@@ -595,22 +607,25 @@ body {
   background-color: #ffffff;
   color: rgb(0, 0, 0) !important;
 }
+
 .mx-auto {
   border-radius: 30px;
 }
-.year{
+
+.year {
   color: rgb(0, 0, 0) !important;
 }
+
 .v-select__selection,
 .v-select__selection--comma,
 .v-select.v-text-field input {
   color: rgb(0, 0, 0) !important;
 }
+
 .text-h4,
-.text-h5
- {
- color: rgb(0, 0, 0) ;
- font-family: "Times New Roman", Times, serif !important;
+.text-h5 {
+  color: rgb(0, 0, 0);
+  font-family: "Times New Roman", Times, serif !important;
 }
 </style>
 <style scoped>
@@ -618,30 +633,38 @@ body {
   background-color: red;
   margin-bottom: 5px;
 }
+
 .green {
   background-color: green;
   margin-bottom: 5px;
 }
+
 .blue {
   background-color: lightblue;
   margin-bottom: 5px;
 }
+
 .short {
   height: 50px;
 }
+
 .tall {
   height: 100px;
 }
+
 .middle {
   height: 75px;
 }
+
 .card {
   height: 100%;
 }
-.full-height{
- border-radius:15px;
+
+.full-height {
+  border-radius: 15px;
 }
-.h5{
+
+.h5 {
   font-size: 1.5rem !important;
   font-weight: 400;
   line-height: 2.5rem;
@@ -649,7 +672,8 @@ body {
   font-family: "Roboto", sans-serif !important;
   color: #ffffff !important;
 }
-.h4{
+
+.h4 {
   font-size: 2.125rem !important;
   font-weight: 400;
   line-height: 2.5rem;
@@ -657,6 +681,7 @@ body {
   font-family: "Roboto", sans-serif !important;
   color: #ffffff !important;
 }
+
 .col-2 {
   flex: 0 0 8.3333333333%;
   max-width: 10%;

@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+
+  shipping-dashboard-app:
+    image: nuxt_dashboard:latest
+    restart: always
+    container_name: shipping-dashboard
+    ports:
+    - 9008:9008
+    environment:
+      - TZ=Asia/Bangkok

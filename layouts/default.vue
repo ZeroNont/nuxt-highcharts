@@ -102,15 +102,20 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-home',
-          title: 'Home',
+          icon: 'mdi-truck',
+          title: 'Shipping',
           to: '/HomePage'
+        },
+        {
+          icon: 'mdi-account-multiple',
+          title: 'Meeting',
+          to: '/MeetingPage'
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Shipping Dashboard'
+      title: 'Dashboard'
     }
   }
 }
